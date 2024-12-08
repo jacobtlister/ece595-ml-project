@@ -15,7 +15,7 @@ dataTest_b  = backg_data(idx);
 
 data_train  = [dataTrain_b dataTrain_c];
 
-opt = anfisOptions("EpochNumber", 15);
+opt = anfisOptions("EpochNumber", 5);
 
 fis = anfis(data_train, opt);
 
