@@ -8,10 +8,12 @@ range = fis.Inputs.Range;
 backg_data(find(backg_data < range(1))) = range(1);
 backg_data(find(backg_data > range(2))) = range(2);
 
-test = evalfis(fis, whiteless_data);
+test = evalfis(fis, backg_data);
 
-sound(15 * test(1 : (44100 * 10)), 44100)
-pure_noise = -(backg_data - clean_data);
+%sound(15 * test(1 : (44100 * 10)), 44100)
+%pause(15)
+%sound(8*backg_data(1:(44100*10)), 44100)
+pure_noise = backg_data - clean_data;
 
 subplot(4,1,1)
 plot(1 : length(test), test);

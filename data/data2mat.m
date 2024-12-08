@@ -12,9 +12,9 @@ clear
 clc
 format compact
 
-clean_data = audioread("/concatenated/concat_clean.wav");
-noisy_data = audioread("/concatenated/concat_noisy.wav");
-backg_data = audioread("/concatenated/concat_noisy_background.wav");
-whiteless_data = audioread("/concatenated/white_missing.wav");
+clean_data = audioread("/data/concatenated/concat_clean.wav");
+noisy_data = audioread("/data/concatenated/concat_noisy.wav");
+backg_data = audioread("/data/concatenated/concat_noisy_background.wav");
+whiteless_data = audioread("/data/concatenated/white_missing.wav");
 
 save("audio_data")

@@ -2,7 +2,7 @@ clear
 clc
 format compact
 
-load("./data/audio_data")
+load("audio_data.mat")
 
 cv = cvpartition(size(clean_data,1), 'HoldOut', 0.2);
 idx = cv.test;
@@ -14,6 +14,7 @@ dataTrain_b = backg_data(~idx);
 dataTest_b  = backg_data(idx);
 
 dataTrain_n = noisy_data(~idx);
+dataTest_n = noisy_data(idx);
 dataTrain_w = whiteless_data(~idx);
 
 data_train  = [dataTrain_b dataTrain_c];
@@ -23,7 +24,8 @@ opt.NumMembershipFunctions = 5;
 fisin = genfis(dataTrain_w, dataTrain_c, opt);
 [in, out, rule] = getTunableSettings(fisin);
 tuneopt = tunefisOptions("Method", "anfis");
-tuneopt.MethodOptions.EpochNumber = 20;
-fis = tunefis(fisin, [in;out], dataTrain_w, dataTrain_c, tuneopt);
+tuneopt.MethodOptions.EpochNumber = 30;
+tuneopt.MethodOptions.ValidationData = [dataTest_n dataTest_c];
+fis = tunefis(fisin, [in;out], dataTrain_n, dataTrain_c, tuneopt);
 
 save("model")
