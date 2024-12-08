@@ -34,7 +34,14 @@ ylim([-0.6 0.6])
 
 set(gcf, 'Position', [100 100 1200 600])
 
+backg_spec = stft(backg_data, 44100);
+backg_filt = wiener2(backg_spec, [16 16]);
+backg_sign = abs(istft(backg_filt, 44100));
+
+%sound(backg_sign(1 : (44100 * 10)), 44100);
+
 fprintf("SNR for clean data: %.5f\n", snr(clean_data, pure_noise))
 fprintf("SNR for data with background noise: %.5f\n", snr(backg_data, pure_noise))
-fprintf("SNR for filtered data: %.5f\n", snr(test, pure_noise))
+fprintf("SNR for ANFIS filtered data: %.5f\n", snr(test, pure_noise))
+fprintf("SNR fir Wiener fitered data: %.5f\n", snr(backg_sign, clean_data(1 : end - 2) - backg_sign))
 
