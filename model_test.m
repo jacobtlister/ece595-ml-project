@@ -10,7 +10,7 @@ backg_data(find(backg_data > range(2))) = range(2);
 
 test = evalfis(fis, backg_data);
 
-%sound(15 * test(1 : (44100 * 10)), 44100)
+sound(15 * test(1 : (44100 * 10)), 44100)
 pure_noise = -(backg_data - clean_data);
 
 subplot(4,1,1)
