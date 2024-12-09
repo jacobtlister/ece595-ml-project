@@ -17,8 +17,6 @@ dataTrain_n = noisy_data(~idx);
 dataTest_n = noisy_data(idx);
 dataTrain_w = whiteless_data(~idx);
 
-data_train  = [dataTrain_b dataTrain_c];
-
 opt = genfisOptions("GridPartition");
 opt.NumMembershipFunctions = 5;
 fisin = genfis(dataTrain_w, dataTrain_c, opt);
